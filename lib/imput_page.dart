@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 const double bottomContainerHeight = 80;
 const activeCardColor = Color(0xFF1D1E33);
@@ -24,8 +25,20 @@ class InputPageState extends State<InputPage> {
           Expanded(
             child: Row(
               children: const [
-                ReusableCard(cardColor: activeCardColor),
-                ReusableCard(cardColor: activeCardColor),
+                ReusableCard(
+                  cardColor: activeCardColor,
+                  cardChild: IconContent(
+                    iconCard: FontAwesomeIcons.mars,
+                    textCard: 'male',
+                  ),
+                ),
+                ReusableCard(
+                  cardColor: activeCardColor,
+                  cardChild: IconContent(
+                    iconCard: FontAwesomeIcons.venus,
+                    textCard: 'femail',
+                  ),
+                ),
               ],
             ),
           ),
@@ -51,9 +64,35 @@ class InputPageState extends State<InputPage> {
   }
 }
 
+class IconContent extends StatelessWidget {
+  const IconContent(
+      {super.key, required this.textCard, required this.iconCard});
+  final String textCard;
+  final IconData iconCard;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(iconCard, size: 80),
+        const SizedBox(height: 15),
+        Text(
+          textCard,
+          style: const TextStyle(
+            fontSize: 18,
+            color: Color(0xff8d8e98),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
 class ReusableCard extends StatelessWidget {
-  const ReusableCard({super.key, required this.cardColor});
+  const ReusableCard({super.key, required this.cardColor, this.cardChild});
   final Color cardColor;
+  final Widget? cardChild;
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -63,6 +102,7 @@ class ReusableCard extends StatelessWidget {
           color: cardColor,
           borderRadius: BorderRadius.circular(10),
         ),
+        child: cardChild,
       ),
     );
   }

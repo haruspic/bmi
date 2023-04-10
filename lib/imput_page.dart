@@ -21,20 +21,7 @@ class InputPage extends StatefulWidget {
 }
 
 class InputPageState extends State<InputPage> {
-  Color maleCardColor = inactiveCardColor;
-  Color femaleCardColor = inactiveCardColor;
-
-  void updateColor(Gender selectedGender) {
-    setState(() {
-      if (selectedGender == Gender.male) {
-        maleCardColor = activeCardColor;
-        femaleCardColor = inactiveCardColor;
-      } else {
-        maleCardColor = inactiveCardColor;
-        femaleCardColor = activeCardColor;
-      }
-    });
-  }
+  Gender? selectedGender;
 
   @override
   Widget build(BuildContext context) {
@@ -51,10 +38,14 @@ class InputPageState extends State<InputPage> {
                 Expanded(
                   child: GestureDetector(
                     onTap: () {
-                      updateColor(Gender.male);
+                      setState(() {
+                        selectedGender = Gender.male;
+                      });
                     },
                     child: ReusableCard(
-                      cardColor: maleCardColor,
+                      cardColor: selectedGender == Gender.male
+                          ? activeCardColor
+                          : inactiveCardColor,
                       cardChild: const IconContent(
                         icon: FontAwesomeIcons.mars,
                         lable: 'male',
@@ -65,10 +56,14 @@ class InputPageState extends State<InputPage> {
                 Expanded(
                   child: GestureDetector(
                     onTap: () {
-                      updateColor(Gender.female);
+                      setState(() {
+                        selectedGender = Gender.female;
+                      });
                     },
                     child: ReusableCard(
-                      cardColor: femaleCardColor,
+                      cardColor: selectedGender == Gender.female
+                          ? activeCardColor
+                          : inactiveCardColor,
                       cardChild: const IconContent(
                         icon: FontAwesomeIcons.venus,
                         lable: 'femail',

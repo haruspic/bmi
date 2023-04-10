@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'constants.dart';
 
 class IconContent extends StatelessWidget {
   const IconContent({super.key, required this.lable, required this.icon});
@@ -12,13 +13,7 @@ class IconContent extends StatelessWidget {
       children: [
         Icon(icon, size: 80),
         const SizedBox(height: 15),
-        Text(
-          lable,
-          style: const TextStyle(
-            fontSize: 18,
-            color: Color(0xff8d8e98),
-          ),
-        ),
+        Text(lable, style: kLableTextStyle),
       ],
     );
   }

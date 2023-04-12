@@ -1,5 +1,5 @@
+import 'package:bmi/screens/imput_page.dart';
 import 'package:flutter/material.dart';
-import 'imput_page.dart';
 
 void main() => runApp(const BMICalculator());
 
